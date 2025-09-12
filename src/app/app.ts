@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TodosStore } from './store/todos.store';
 
@@ -8,8 +8,10 @@ import { TodosStore } from './store/todos.store';
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {
-  protected readonly title = signal('ngrx-signal-store');
-
+export class App implements OnInit {
   store = inject(TodosStore);
+
+  ngOnInit(): void {
+    this.store.todos();
+  }
 }
