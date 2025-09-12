@@ -1,10 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TodosStore } from './store/todos.store';
+import { JsonPipe } from '@angular/common'; // <-- Add this import
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, JsonPipe],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
