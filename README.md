@@ -1,5 +1,18 @@
 # NgrxSignalStore
 
+```bash
+cd projects/angular
+mkdir signals
+cd signals
+nvm use v22.14.0
+ng new ngrx-signal-store
+git branch -m main
+ng add @angular/material
+ng add @ngrx/store@latest
+npm i @ngrx/signals
+npm run start
+```
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
 
 ## Development server
