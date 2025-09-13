@@ -1,5 +1,7 @@
 # NgrxSignalStore
 
+![alt text](https://github.com/SiecleGitHub/ngrx-signal-store/blob/main/signal-store.jpg?raw=true)
+
 ```bash
 cd projects/angular
 mkdir signals
