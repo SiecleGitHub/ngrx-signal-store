@@ -3,8 +3,9 @@
   flex-direction: column;
   padding-top: 100px;
   align-items: center;
+  background-color: white;
 }
-.angular-univ-container {
+.main-container {
   margin-bottom: 70px;
   display: flex;
   flex-direction: column;
@@ -15,8 +16,7 @@
   }
   img {
     border-radius: 200px;
-    max-height: 200px;
-    background-color: rgb(32, 2, 88);
+    max-height: 130px;
   }
   a {
     font-size: 20px;

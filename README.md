@@ -1,4 +1,4 @@
-# NgrxSignalStore
+# NgRx Signal Store
 
 ![alt text](https://github.com/SiecleGitHub/ngrx-signal-store/blob/main/signal-store.jpg?raw=true)
 
