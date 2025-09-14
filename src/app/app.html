@@ -5,7 +5,11 @@
         src="https://yt3.ggpht.com/L7fPOHO5TwVC_qz78Yo8P0MuJAB8I4FdQmOY2HSW7Z4_AFJZgAHzJCKQXo7ek1sy0pj0dIzM2Xg=s88-c-k-c0x00ffffff-no-rj"
         alt="angular-logo"
       />
+      @if(!store.loading()) {
       <todos-list />
+      } @else {
+      <mat-spinner />
+      }
     </div>
   </div>
 </main>

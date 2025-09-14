@@ -2,6 +2,12 @@
 
 ![alt text](https://github.com/SiecleGitHub/ngrx-signal-store/blob/main/signal-store.jpg?raw=true)
 
+## Loading Spinner
+
+![alt text](https://github.com/SiecleGitHub/ngrx-signal-store/blob/main/signal-store-loading-spinner.jpg?raw=true)
+
+## Project Creation
+
 ```bash
 cd projects/angular
 mkdir signals
