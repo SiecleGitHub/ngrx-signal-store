@@ -10,6 +10,14 @@ export class TodosService {
     await sleep(1000); // Simulate network delay
     return TODOS;
   }
+
+  async addTodo(todo: Partial<Todo>): Promise<Todo> {
+    await sleep(1000); // Simulate network delay
+    return {
+      id: Math.random().toString(36).substring(2, 9),
+      ...todo,
+    } as Todo;
+  }
 }
 
 export async function sleep(ms: number): Promise<void> {
