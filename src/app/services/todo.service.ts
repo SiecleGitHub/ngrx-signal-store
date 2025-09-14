@@ -22,6 +22,10 @@ export class TodosService {
   async deleteTodo(id: string) {
     await sleep(500); // Simulate network delay
   }
+
+  async updateTodo(id: string, completed: boolean) {
+    await sleep(1000); // Simulate network delay
+  }
 }
 
 export async function sleep(ms: number): Promise<void> {

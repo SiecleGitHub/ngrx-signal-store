@@ -1,10 +1,14 @@
 # NgRx Signal Store
 
-![alt text](https://github.com/SiecleGitHub/ngrx-signal-store/blob/main/signal-store.jpg?raw=true)
+![Todo List](https://github.com/SiecleGitHub/ngrx-signal-store/blob/main/signal-store.jpg?raw=true)
 
 ## Loading Spinner
 
-![alt text](https://github.com/SiecleGitHub/ngrx-signal-store/blob/main/signal-store-loading-spinner.jpg?raw=true)
+![Loading Spinner](https://github.com/SiecleGitHub/ngrx-signal-store/blob/main/signal-store-loading-spinner.jpg?raw=true)
+
+## Todo Completed
+
+![Todo Completed](https://github.com/SiecleGitHub/ngrx-signal-store/blob/main/signal-store-todo-completed.jpg?raw=true)
 
 ## Project Creation
 
