@@ -1,15 +1,11 @@
-import { Component, effect, inject, viewChild } from '@angular/core';
-import { MatFormField } from '@angular/material/form-field';
-import { MatLabel } from '@angular/material/form-field';
+import { Component, inject } from '@angular/core';
+import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
-import { MatSuffix } from '@angular/material/form-field';
-import { MatButtonToggleGroup } from '@angular/material/button-toggle';
-import { MatButtonToggle } from '@angular/material/button-toggle';
-import { MatSelectionList } from '@angular/material/list';
-import { MatListOption } from '@angular/material/list';
-import { TodosFilter, TodosStore } from '../store/todos.store';
+import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
+import { MatSelectionList, MatListOption } from '@angular/material/list';
 import { NgStyle } from '@angular/common';
+import { TodosFilter, TodosStore } from '../store/todos.store';
 
 @Component({
   selector: 'todos-list',
@@ -30,15 +26,6 @@ import { NgStyle } from '@angular/common';
 })
 export class TodosList {
   store = inject(TodosStore);
-
-  filter = viewChild.required(MatButtonToggleGroup);
-
-  constructor() {
-    effect(() => {
-      console.log('Filter is now:', this.store.filter());
-      console.log('Filtered todos:', this.store.filteredTodos());
-    });
-  }
 
   async onAddTodo(title: string) {
     await this.store.addTodo(title);
