@@ -2,11 +2,7 @@
 
 <mat-form-field class="todo-input">
   <mat-label>Enter a Todo...</mat-label>
-  <input
-    matInput
-    #input
-    (keyup.enter)="input.value.trim() && onAddTodo(input.value); input.value = ''"
-  />
+  <input matInput #input (keyup.enter)="onAddTodo(input.value); input.value = ''" />
   <mat-icon matSuffix>edit</mat-icon>
 </mat-form-field>
 
@@ -16,11 +12,10 @@
   <mat-button-toggle value="completed">Completed</mat-button-toggle>
 </mat-button-toggle-group>
 
-<mat-selection-list class="todos-list">
+<div class="todos-list">
   @for (todo of store.filteredTodos(); track todo.id) {
-  <mat-list-option [selected]="todo.completed" (selectedChange)="store.updateTodo(todo.id, $event)">
-    <div class="todo-item">
-      <mat-icon class="delete-todo" (click)="onDeleteTodo(todo.id, $event)"> delete </mat-icon>
+  <div class="todo-item">
+    <mat-checkbox [checked]="todo.completed" (change)="updateTodo(todo.id, $event.checked)">
       <span
         [ngStyle]="{
           'text-decoration': todo.completed ? 'line-through' : 'none'
@@ -28,7 +23,9 @@
       >
         {{ todo.title }}
       </span>
-    </div>
-  </mat-list-option>
+    </mat-checkbox>
+
+    <mat-icon class="delete-todo" (click)="onDeleteTodo(todo.id, $event)"> delete </mat-icon>
+  </div>
   }
-</mat-selection-list>
+</div>

@@ -1,14 +1,16 @@
 import { Component, inject } from '@angular/core';
-import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
+import { MatSuffix } from '@angular/material/form-field';
 import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
-import { MatSelectionList, MatListOption } from '@angular/material/list';
+import { MatCheckbox } from '@angular/material/checkbox';
 import { NgStyle } from '@angular/common';
 import { TodosFilter, TodosStore } from '../store/todos.store';
 
 @Component({
   selector: 'todos-list',
+  standalone: true,
   imports: [
     MatFormField,
     MatLabel,
@@ -17,8 +19,7 @@ import { TodosFilter, TodosStore } from '../store/todos.store';
     MatSuffix,
     MatButtonToggleGroup,
     MatButtonToggle,
-    MatSelectionList,
-    MatListOption,
+    MatCheckbox,
     NgStyle,
   ],
   templateUrl: './todos-list.html',
@@ -28,7 +29,9 @@ export class TodosList {
   store = inject(TodosStore);
 
   async onAddTodo(title: string) {
-    await this.store.addTodo(title);
+    if (title.trim()) {
+      await this.store.addTodo(title.trim());
+    }
   }
 
   async onDeleteTodo(id: string, event: MouseEvent) {

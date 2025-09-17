@@ -1,11 +1,16 @@
 import { inject, computed } from '@angular/core';
-import { Todo } from '../model/todo.model';
-import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { TodosService } from '../services/todo.service';
+
+export type Todo = {
+  id: string;
+  title: string;
+  completed: boolean;
+};
 
 export type TodosFilter = 'all' | 'active' | 'completed';
 
-type TodosState = {
+export type TodosState = {
   todos: Todo[];
   loading: boolean;
   filter: TodosFilter;
@@ -20,44 +25,59 @@ const initialState: TodosState = {
 export const TodosStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
-  withComputed((state) => ({
-    filteredTodos: computed(() => {
-      switch (state.filter()) {
+  withMethods((store, todosService = inject(TodosService)) => {
+    // derived signal
+    const filteredTodos = computed(() => {
+      const todos = store.todos();
+      const filter = store.filter();
+
+      switch (filter) {
         case 'active':
-          return state.todos().filter((todo) => !todo.completed);
+          return todos.filter((t) => !t.completed);
         case 'completed':
-          return state.todos().filter((todo) => todo.completed);
+          return todos.filter((t) => t.completed);
         default:
-          return state.todos();
+          return todos;
       }
-    }),
-  })),
-  withMethods((store, todosService = inject(TodosService)) => ({
-    async loadAll() {
-      patchState(store, { loading: true });
-      const todos = await todosService.getTodos();
-      patchState(store, { todos, loading: false });
-    },
-    async addTodo(title: string) {
-      const newTodo = await todosService.addTodo({ title, completed: false });
-      patchState(store, (state) => ({
-        todos: [...state.todos, newTodo],
-      }));
-    },
-    async deleteTodo(id: string) {
-      await todosService.deleteTodo(id);
-      patchState(store, (state) => ({
-        todos: state.todos.filter((todo) => todo.id !== id),
-      }));
-    },
-    async updateTodo(id: string, completed: boolean) {
-      await todosService.updateTodo(id, completed);
-      patchState(store, (state) => ({
-        todos: state.todos.map((todo) => (todo.id === id ? { ...todo, completed } : todo)),
-      }));
-    },
-    updateFilter(filter: TodosFilter) {
-      patchState(store, { filter });
-    },
-  }))
+    });
+
+    return {
+      // expose derived signal
+      filteredTodos,
+
+      async loadAll() {
+        patchState(store, { loading: true });
+        const todos = await todosService.getTodos();
+        patchState(store, { todos, loading: false });
+      },
+
+      async addTodo(title: string) {
+        const newTodo = await todosService.addTodo({
+          title,
+          completed: false,
+        });
+        patchState(store, (state) => ({
+          todos: [...state.todos, newTodo],
+        }));
+      },
+
+      async deleteTodo(id: string) {
+        await todosService.deleteTodo(id);
+        patchState(store, (state) => ({
+          todos: state.todos.filter((t) => t.id !== id),
+        }));
+      },
+
+      async updateTodo(id: string, completed: boolean) {
+        await todosService.updateTodo(id, completed);
+        patchState(store, (state) => ({
+          todos: state.todos.map((t) => (t.id === id ? { ...t, completed } : t)),
+        }));
+      },
+
+      updateFilter(filter: TodosFilter) {
+        patchState(store, { filter });
+      },
+    };
+  })
 );
