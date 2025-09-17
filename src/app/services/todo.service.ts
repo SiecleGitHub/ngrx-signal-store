@@ -12,7 +12,7 @@ export class TodosService {
   }
 
   async addTodo(todo: Partial<Todo>): Promise<Todo> {
-    await sleep(1000); // Simulate network delay
+    await sleep(500); // Simulate network delay
     return {
       id: Math.random().toString(36).substring(2, 9),
       ...todo,
@@ -24,7 +24,7 @@ export class TodosService {
   }
 
   async updateTodo(id: string, completed: boolean) {
-    await sleep(1000); // Simulate network delay
+    await sleep(500); // Simulate network delay
   }
 }
 
